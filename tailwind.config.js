@@ -5,4 +5,14 @@ export default {
     extend: {},
   },
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: [
+      {
+        myTheme: {
+          primary: "#6480E2",
+          secondary: "#827F7F",
+        },
+      },
+    ],
+  },
 };

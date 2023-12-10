@@ -1,12 +1,21 @@
 export default function Home() {
   return (
     <div>
-      <div className=" mb-3 w-44 bg-cyan-600 rounded-lg h-52">...</div>
-      <div className=" mb-3 w-44 bg-cyan-600 rounded-lg h-52">...</div>
-      <div className=" mb-3 w-44 bg-cyan-600 rounded-lg h-52">...</div>
-      <div className=" mb-3 w-44 bg-cyan-600 rounded-lg h-52">...</div>
-      <div className=" mb-3 w-44 bg-cyan-600 rounded-lg h-52">...</div>
-      <div className=" w-44 bg-cyan-600 rounded-lg h-52">...</div>
+      <div className="card w-56 bg-base-100 shadow-xl">
+        <figure>
+          <img
+            src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+            alt="Shoes"
+          />
+        </figure>
+        <div className="card-body">
+          <h2 className="card-title text-primary">Shoes!</h2>
+          <p>If a dog chews shoes whose shoes does he choose?</p>
+          <div className="card-actions justify-end">
+            <button className="btn btn-primary">Buy Now</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
