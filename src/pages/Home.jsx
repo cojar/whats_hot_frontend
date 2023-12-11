@@ -1,20 +1,13 @@
 export default function Home() {
   return (
     <div>
-      <div className="card w-56 bg-base-100 shadow-xl">
-        <figure>
-          <img
-            src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-            alt="Shoes"
-          />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title text-primary">Shoes!</h2>
-          <p>If a dog chews shoes whose shoes does he choose?</p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-          </div>
-        </div>
+      <div className="mt-8">
+        <p className="text-3xl">
+          <span className="text-primary">맛집, 숙박, 여행지</span> 리뷰
+        </p>
+        <p className="mt-2 text-secondary">
+          로그인을 하면 더 많은 기능을 이용할 수 있어요!
+        </p>
       </div>
     </div>
   );
