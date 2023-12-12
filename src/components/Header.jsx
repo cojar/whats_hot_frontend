@@ -7,5 +7,6 @@ export default function Header() {
     <div className="font-bold w-fit ml-auto text-primary">
       {location.pathname !== "/login" && <Link to="/login">로그인</Link>}
     </div>
+    
   );
 }
