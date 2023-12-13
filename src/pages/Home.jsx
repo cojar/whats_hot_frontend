@@ -1,4 +1,4 @@
-import PopularResturants from "../components/PopularRestaurants";
+import Carousel from "../components/Carousel";
 import RecommendedAccommodation from "../components/RecommendedAccommodation";
 import RecommendedDestinations from "../components/RecommendedDestinations";
 import Tags from "../components/Tags";
@@ -8,12 +8,11 @@ export default function Home() {
   return (
     <>
       <Introduction />
-      <PopularResturants />
+      <Carousel />
       <Tags />
       <RecommendedAccommodation />
       <Tags />
       <RecommendedDestinations />
     </>
-    
   );
 }
