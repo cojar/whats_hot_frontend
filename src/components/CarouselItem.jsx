@@ -15,6 +15,7 @@ const covers = [
   Restaurant4,
   Restaurant5,
   Restaurant6,
+  
 ];
 
 export default function CarouselItem({ title, index }) {
