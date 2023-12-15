@@ -2,7 +2,11 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        cover: "url('/src/assets/restaurant1.png')",
+      },
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {

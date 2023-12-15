@@ -5,3 +5,9 @@
 body {
   background-color: #e3e2e2;
 }
+
+.content-container {
+  line-height: 1.1;
+  height: calc(1.1em * 2);
+  word-break: keep-all;
+}

@@ -1,7 +1,5 @@
 import Carousel from "../components/Carousel";
-import RecommendedAccommodation from "../components/RecommendedAccommodation";
-import RecommendedDestinations from "../components/RecommendedDestinations";
-import Tags from "../components/Tags";
+import RecommendedRestaurant from "../components/RecommendedRestaurant";
 import Introduction from "../components/Introduction";
 
 export default function Home() {
@@ -9,10 +7,7 @@ export default function Home() {
     <>
       <Introduction />
       <Carousel />
-      <Tags />
-      <RecommendedAccommodation />
-      <Tags />
-      <RecommendedDestinations />
+      <RecommendedRestaurant />
     </>
   );
 }
