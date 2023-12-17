@@ -12,39 +12,35 @@ const restaurantMockItems = [
   {
     id: "skeIDn9",
     title: "명품스시",
+    cover: Restaurant1,
   },
   {
     id: "oweEjS12",
     title: "명품한우",
+    cover: Restaurant2,
   },
   {
     id: "8ESkdhs",
     title: "명품국밥",
+    cover: Restaurant3,
   },
   {
     id: "j9ewKs",
     title: "성심당",
+    cover: Restaurant4,
   },
   {
     id: "asoiKS12",
     title: "일품갈비",
+    cover: Restaurant5,
   },
-];
-
-const restaurantCovers = [
-  Restaurant1,
-  Restaurant2,
-  Restaurant3,
-  Restaurant4,
-  Restaurant5,
-  Restaurant6,
 ];
 
 export default function Home() {
   return (
     <>
       <Introduction />
-      <Carousel mockItems={restaurantMockItems} covers={restaurantCovers} />
+      <Carousel mockItems={restaurantMockItems} />
       <RecommendedRestaurant />
     </>
   );

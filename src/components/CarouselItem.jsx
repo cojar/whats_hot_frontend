@@ -2,14 +2,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
-export default function CarouselItem({ title, index, covers }) {
+export default function CarouselItem({ title, cover }) {
   return (
     <li>
       <div className="carousel-item flex-col w-36 rounded-2xl border shadow-lg ">
         <div className="h-48">
           <img
-            className="w-full h-full object-cover  rounded-t-2xl"
-            src={covers[index]}
+            className="w-full h-full object-cover rounded-t-2xl"
+            src={cover}
             alt=""
           />
         </div>

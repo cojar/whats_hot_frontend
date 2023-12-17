@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CarouselItem from "./CarouselItem";
 
-export default function Carousel({ mockItems, covers }) {
+export default function Carousel({ mockItems }) {
   //임시 변수
   const [items, setItems] = useState(mockItems);
 
@@ -15,12 +15,7 @@ export default function Carousel({ mockItems, covers }) {
       <ul className="carousel carousel-center w-full space-x-3 ">
         {items.map((item, i) => {
           return (
-            <CarouselItem
-              key={item.id}
-              title={item.title}
-              index={i + 1}
-              covers={covers}
-            />
+            <CarouselItem key={item.id} title={item.title} cover={item.cover} />
           );
         })}
       </ul>
