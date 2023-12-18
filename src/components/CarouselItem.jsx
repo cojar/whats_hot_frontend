@@ -16,7 +16,9 @@ export default function CarouselItem({ title, cover }) {
 
         <div className="p-2  h-full flex flex-col">
           <div className="flex items-start">
-            <p className="text-lg mb-2">{title}</p>
+            <p className="text-lg mb-2 whitespace-nowrap overflow-hidden text-ellipsis">
+              {title}
+            </p>
             <span className="ml-auto bg-primary text-white p-1 rounded-lg flex justify-center items-center -mt-6 cursor-pointer">
               <FontAwesomeIcon icon={faHeart} className="text-xl" />
             </span>

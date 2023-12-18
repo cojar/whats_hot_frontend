@@ -11,7 +11,7 @@ import Restaurant6 from "../assets/restaurant6.png";
 const restaurantMockItems = [
   {
     id: "skeIDn9",
-    title: "명품스시",
+    title: "명품스시앤똔까스",
     cover: Restaurant1,
   },
   {
