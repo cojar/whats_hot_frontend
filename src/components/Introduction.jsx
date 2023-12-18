@@ -5,7 +5,8 @@ function Introduction() {
     <>
       <div className="mt-8">
         <p className="text-3xl">
-          <b className="text-primary">맛집, 숙박, 여행지</b> 리뷰
+          <b className="text-primary">맛집, 숙박, 여행지</b>{" "}
+          <span className="text-2xl font-semibold">리뷰</span>
         </p>
         <p className="mt-2 text-secondary">
           로그인을 하면 더 많은 기능을 이용할 수 있어요!
