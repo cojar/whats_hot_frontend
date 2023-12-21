@@ -8,7 +8,7 @@ import Restaurant4 from "../assets/restaurant4.png";
 import Restaurant5 from "../assets/restaurant5.png";
 import Restaurant6 from "../assets/restaurant6.png";
 
-const restaurantMockItems = [
+export const restaurantMockItems = [
   {
     id: "skeIDn9",
     title: "명품스시앤똔까스",
@@ -41,7 +41,7 @@ export default function Home() {
     <>
       <Introduction />
       <Carousel mockItems={restaurantMockItems} />
-      <RecommendedRestaurant />
+      <RecommendedRestaurant restaurantItems={restaurantMockItems} />
     </>
   );
 }

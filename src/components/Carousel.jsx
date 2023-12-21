@@ -12,7 +12,7 @@ export default function Carousel({ mockItems }) {
       <ul className="carousel carousel-center w-full space-x-3 ">
         {mockItems.map((item, i) => {
           return (
-            <CarouselItem key={item.id} title={item.title} cover={item.cover} />
+            <CarouselItem key={item.id} title={item.title} cover={item.cover} id={item.id}/>
           );
         })}
       </ul>
