@@ -13,20 +13,22 @@ export default function DetailPage() {
   }
 
   return (
-    <div className="relative">
-      <div className="w-full h-full mt-5">
-        <div className="w-full relative">
+    <div className="mt-5">
+      <div>
+        <div className="  h-96">
           <img
             src={selectedRestaurant.cover}
             alt={selectedRestaurant.title}
-            className="w-full rounded-2xl"
+            className="w-full h-full object-cover rounded-2xl"
           />
         </div>
-        <span className="bg-primary p-1 rounded-lg absolute top-96 right-2 z-10">
-          <FontAwesomeIcon icon={faHeart} className="text-xl text-white" />
-        </span>
-        <div className="absolute top-3/4 bg-white w-full rounded-2xl border p-4">
-          <h5 className="text-2xl font-bold">{selectedRestaurant.title}</h5>
+        <div className=" bg-white w-full rounded-2xl p-4 -translate-y-16">
+          <div class="flex justify-between">
+            <h5 className="text-2xl font-bold">{selectedRestaurant.title}</h5>
+            <span className=" -mt-7 bg-primary w-8 h-8 rounded-lg flex justify-center items-center">
+              <FontAwesomeIcon icon={faHeart} className="text-xl text-white" />
+            </span>
+          </div>
           <p className="mt-3">
             대한민국 제주특별자치도 서귀포시 중문관광단지 인근과 서울 강남에
             위치한 돈까스 전문 요리점 프랜차이즈이며, 방송을 타고 나서 유명세를
