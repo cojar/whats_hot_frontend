@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 
 export default function RecommendedRestaurant() {
   const [spots, setSpots] = useState([]);
+  const firstThreeSpots = spots.slice(0, 3);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +23,7 @@ export default function RecommendedRestaurant() {
   return (
     <>
       <Tags />
-      {spots.map((spot) => (
+      {firstThreeSpots.map((spot) => (
         <Link to={`/DetailPage/${spot.id}`} key={spot.id}>
           <div className="w-full cursor-pointer p-2 rounded-2xl bg-white border shadow-lg flex gap-2 ">
             <div
