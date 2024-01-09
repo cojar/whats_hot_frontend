@@ -8,16 +8,17 @@ export default function RecommendedRestaurant() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://whb.pintor.dev/api/spots');
+        const response = await fetch('api/spots');
         const data = await response.json();
         setSpots(data.data.list);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("에러입니다. : ", error);
       }
     };
 
     fetchData();
   }, []);
+
   return (
     <>
       <Tags />
@@ -30,7 +31,7 @@ export default function RecommendedRestaurant() {
             ></div>
             <div className="flex-grow  flex flex-col ">
               <p className="font-bold mb-1">{spot.name}</p>
-              <p className="flex-shrink-0 text-xs content-container w-64 text-secondary overflow-hidden hover:overflow-visible">
+              <p className="flex-shrink-0 text-xs content-container w-64 text-secondary overflow-hidden">
                 대한민국 제주특별자치도 서귀포시 중문관광단지 인근과 서울 강남에
                 위치한 돈까스 전문 요리점 프랜차이즈이며, 방송을 타고 나서
                 유명세를 얻게 된 대표적인 식당이다.
@@ -41,7 +42,7 @@ export default function RecommendedRestaurant() {
                     {spot.hashtags.map((tag, index) => (
                       <span
                         key={index}
-                        className="ml-1 text-sm text-white opacity-65 bg-primary rounded-2xl flex justify-center items-center p-1"
+                        className="ml-1 text-xs text-white opacity-65 bg-primary rounded-2xl flex justify-center items-center p-1"
                       >
                         {tag}
                       </span>
