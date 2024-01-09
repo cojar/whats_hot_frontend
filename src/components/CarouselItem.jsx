@@ -1,28 +1,33 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
-
-
-export default function CarouselItem({ id, title, cover }) {
+export default function CarouselItem({ id, name, images, address }) {
   return (
     <li>
       <Link to={`/DetailPage/${id}`} key={id}>
         <div className="carousel-item flex-col w-36 rounded-2xl border shadow-lg">
           <div className="h-48">
-            <img
-              className="w-full h-full object-cover rounded-t-2xl"
-              src={cover}
-              alt=""
-            />
+            {images && images.length > 0 && (
+              <>
+                {images.map((image, index) => (
+                  <img
+                    key={index}
+                    className="w-full h-full object-cover rounded-t-2xl"
+                    src={image}
+                    alt={`Image ${index + 1}`}
+                  />
+                ))}
+              </>
+            )}
           </div>
 
           <div className="p-2 h-full flex flex-col">
             <div className="flex items-start">
               <p className="text-lg mb-2 whitespace-nowrap overflow-hidden text-ellipsis">
-                {title}
+                {name}
               </p>
               <span className="ml-auto bg-primary text-white p-1 rounded-lg flex justify-center items-center -mt-6 cursor-pointer">
                 <FontAwesomeIcon icon={faHeart} className="text-xl" />
@@ -33,7 +38,7 @@ export default function CarouselItem({ id, title, cover }) {
                 icon={faLocationDot}
                 className="text-sm text-primary opacity-60"
               />
-              <p className="ml-1 text-xs text-secondary mt-auto">장소위치</p>
+              <p className="ml-1 text-xs text-secondary mt-auto whitespace-nowrap overflow-hidden">{address}</p>
             </div>
           </div>
         </div>
