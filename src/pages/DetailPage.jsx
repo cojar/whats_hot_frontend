@@ -2,7 +2,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { restaurantMockItems } from "./Home";
 
 export default function DetailPage() {
   const { id } = useParams();
@@ -15,7 +14,7 @@ export default function DetailPage() {
   return (
     <div className="mt-5">
       <div>
-        <div className="  h-96">
+        <div className="h-96">
           <img
             src={selectedRestaurant.cover}
             alt={selectedRestaurant.title}
