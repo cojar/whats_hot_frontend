@@ -8,7 +8,7 @@ export default function RecommendedRestaurant() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://whb.pintor.dev/api/spots");
+        const response = await fetch("/api/spots");
         const data = await response.json();
         setSpots(data.data.list);
       } catch (error) {
