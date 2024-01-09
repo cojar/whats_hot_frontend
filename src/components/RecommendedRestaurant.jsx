@@ -8,7 +8,7 @@ export default function RecommendedRestaurant() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("api/spots");
+        const response = await fetch("/api/spots");
         const data = await response.json();
         setSpots(data.data.list);
       } catch (error) {
@@ -41,7 +41,7 @@ export default function RecommendedRestaurant() {
                     {spot.hashtags.map((tag, index) => (
                       <span
                         key={index}
-                        className="ml-1 text-sm w-10 text-white opacity-65 bg-primary rounded-2xl flex justify-center items-center p-1"
+                        className="ml-1 text-sm text-white opacity-65 bg-primary rounded-2xl flex justify-center items-center p-1"
                       >
                         {tag}
                       </span>
