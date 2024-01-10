@@ -24,7 +24,7 @@ export default function Carousel() {
       <div className="mt-16">
         <p className="text-xl font-bold mb-3">현재 인기 많은 맛집</p>
       </div>
-      <ul className="carousel carousel-center w-full space-x-3 ">
+      <ul className="carousel carousel-center w-full space-x-3 overflow-x-auto">
         {spots.map((spot) => (
           <CarouselItem key={spot.id} name={spot.name} images={spot.imageUri} id={spot.id} address={spot.address}/>
         ))}
