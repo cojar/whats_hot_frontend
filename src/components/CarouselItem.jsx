@@ -1,10 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { React, memo } from "react";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
-export default function CarouselItem({ id, name, images, address }) {
+export default memo(function CarouselItem({ id, name, images, address }) {
   return (
     <li>
       <Link to={`/DetailPage/${id}`} key={id}>
@@ -38,11 +38,13 @@ export default function CarouselItem({ id, name, images, address }) {
                 icon={faLocationDot}
                 className="text-sm text-primary opacity-60"
               />
-              <p className="ml-1 text-xs text-secondary mt-auto whitespace-nowrap overflow-hidden">{address}</p>
+              <p className="ml-1 text-xs text-secondary mt-auto whitespace-nowrap overflow-hidden">
+                {address}
+              </p>
             </div>
           </div>
         </div>
       </Link>
     </li>
   );
-}
+});

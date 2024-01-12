@@ -1,17 +1,53 @@
-import { Link } from "react-router-dom";
+import { useCallback, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
+import useInput from "../hooks/useInput";
+import axios from "axios";
 
 export default function Login() {
-  const onSubmit = () => {};
+  const [username, onChangeUsername, setUsername] = useInput("");
+
+  const [password, onChangePassword, setPassword] = useInput("");
+  const [loginSuccess, setLoginSucess] = useState(false);
+
+  const onSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      console.log(username, password);
+      if (!username || !password) {
+        return;
+      }
+
+      axios
+        .post("https://whb.pintor.dev/api/members/login", {
+          username,
+          password,
+        })
+        .then((res) => {
+          localStorage.setItem("accessToken", res.data.data.accessToken);
+          setLoginSucess(true);
+        })
+        .catch((error) => {
+          console.log(error.response.data.message);
+        });
+    },
+    [username, password]
+  );
+
+  if (loginSuccess) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className="mt-24">
       <form onSubmit={onSubmit}>
         <div>
-          <label for="email">이메일</label>
+          <label for="id">아이디</label>
           <input
             className="block border-2 border-secondary w-full rounded-lg py-2 px-1"
-            type="email"
-            id="email"
+            type="text"
+            id="id"
+            value={username}
+            onChange={onChangeUsername}
           />
         </div>
         <div className="mt-8">
@@ -20,6 +56,8 @@ export default function Login() {
             className="block border-2 border-secondary w-full rounded-lg py-2 px-1"
             type="password"
             id="password"
+            value={password}
+            onChange={onChangePassword}
           />
         </div>
 
