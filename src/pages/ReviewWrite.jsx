@@ -20,10 +20,13 @@ export default function ReviewWrite() {
         formData.append("image", image);
 
         // 이미지 업로드 후 서버에서 받아온 URL
-        const uploadResponse = await fetch("https://whb.pintor.dev/api/upload", {
-          method: "POST",
-          body: formData,
-        });
+        const uploadResponse = await fetch(
+          "https://whb.pintor.dev/api/upload",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
 
         const uploadResult = await uploadResponse.json();
 
@@ -45,8 +48,8 @@ export default function ReviewWrite() {
           spotId: id,
           title,
           content,
-          score: parseFloat(score) || 0,  // 소수점도 허용하며, 값이 없으면 0으로 처리
-          imageUri: imageUrl ? [imageUrl] : [],  // 이미지가 선택되었을 때만 URL 추가
+          score: parseFloat(score) || 0, // 소수점도 허용하며, 값이 없으면 0으로 처리
+          imageUri: imageUrl ? [imageUrl] : [], // 이미지가 선택되었을 때만 URL 추가
         }),
       });
 
@@ -95,7 +98,9 @@ export default function ReviewWrite() {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-2">이미지 업로드</label>
+          <label className="block text-sm font-semibold mb-2">
+            이미지 업로드
+          </label>
           <input
             type="file"
             accept="image/*"

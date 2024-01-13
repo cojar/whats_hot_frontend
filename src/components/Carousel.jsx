@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import CarouselItem from './CarouselItem';
+import React, { useEffect, useState } from "react";
+import CarouselItem from "./CarouselItem";
 
 export default function Carousel() {
-  
   const [spots, setSpots] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://whb.pintor.dev/api/spots');
+        const response = await fetch("https://whb.pintor.dev/api/spots");
         const data = await response.json();
         setSpots(data.data.list);
       } catch (error) {
-        console.error('에러입니다 :', error);
+        console.error("에러입니다 :", error);
       }
     };
-  
+
     fetchData();
   }, []);
 
@@ -26,7 +25,13 @@ export default function Carousel() {
       </div>
       <ul className="carousel carousel-center w-full space-x-3 overflow-x-auto">
         {spots.map((spot) => (
-          <CarouselItem key={spot.id} name={spot.name} images={spot.imageUri} id={spot.id} address={spot.address}/>
+          <CarouselItem
+            key={spot.id}
+            name={spot.name}
+            images={spot.imageUri}
+            id={spot.id}
+            address={spot.address}
+          />
         ))}
       </ul>
     </>
