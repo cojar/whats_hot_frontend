@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import DetailPage from "./pages/DetailPage";
 import SignUp from "./pages/SignUp";
 import Logout from "./pages/Logout";
+import ReviewWrite from "./pages/ReviewWrite";
 
 function App() {
   return (
@@ -16,6 +17,10 @@ function App() {
           <Route path="/logout" element={<Logout />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/DetailPage/:id" element={<DetailPage />} />
+          <Route
+            path="/DetailPage/:id/review/write"
+            element={<ReviewWrite />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>
