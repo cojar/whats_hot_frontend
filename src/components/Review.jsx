@@ -9,9 +9,7 @@ export default function Review() {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await fetch(
-          `https://whb.pintor.dev/api/reviews?spotId=${id}`
-        );
+        const response = await fetch(`https://whb.pintor.dev/api/reviews?spotId=${id}`);
         const data = await response.json();
 
         console.log("API 응답:", data);

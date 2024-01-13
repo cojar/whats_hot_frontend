@@ -15,7 +15,7 @@ export default function Detail() {
 
         setSpots(data.data);
       } catch (error) {
-        console.error("에러입니다 :", error);
+        console.error('에러입니다 :', error);
       }
     };
 
@@ -26,10 +26,11 @@ export default function Detail() {
     return <p>해당 맛집을 찾을 수 없습니다.</p>;
   }
 
+
   return (
     <div className="mt-5">
       <div>
-        <div className="h-96">
+      <div className="h-96">
           {spots.imageUri && spots.imageUri.length > 0 && (
             <img
               src={spots.imageUri[0]}
