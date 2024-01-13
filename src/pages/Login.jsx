@@ -29,7 +29,7 @@ export default function Login() {
         .catch((error) => {
           console.log(error.response.data.message);
         });
-    },  
+    },
     [username, password]
   );
 
@@ -61,7 +61,7 @@ export default function Login() {
           />
         </div>
 
-        <button className="mt-8 text-white bg-primary w-full p-2 rounded-md">
+        <button class="mt-8 text-white bg-primary w-full p-2 rounded-md mt-4">
           간편 로그인하기
         </button>
       </form>
