@@ -5,7 +5,7 @@ import Login from "./pages/Login";
 import DetailPage from "./pages/DetailPage";
 import SignUp from "./pages/SignUp";
 import Logout from "./pages/Logout";
-import ReviewWrite from "./pages/DetailWrite";
+import ReviewWrite from "./pages/ReviewWrite";
 
 function App() {
   return (
