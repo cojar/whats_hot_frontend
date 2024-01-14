@@ -24,7 +24,11 @@ export default function RecommendedRestaurant() {
     <>
       <Tags />
       {firstThreeSpots.map((spot) => (
-        <Link to={`/DetailPage/${spot.id}`} key={spot.id}>
+        <Link
+          to={`/DetailPage/${spot.id}`}
+          key={spot.id}
+          className="block mt-3"
+        >
           <div className="w-full cursor-pointer p-2 rounded-2xl bg-white border shadow-lg flex gap-2 ">
             <div
               className="w-24 flex-shrink-0 bg-cover rounded-lg"
