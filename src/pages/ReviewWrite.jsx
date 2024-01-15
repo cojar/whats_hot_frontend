@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-export default function ReviewWrite() {
+export default function ReviewWrite({ id, reviews, setReviews }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [score, setScore] = useState("");
@@ -9,11 +9,43 @@ export default function ReviewWrite() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    navigate(`/DetailPage/${id}`);
+  
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+      if (!accessToken) {
+        console.error("사용자가 로그인되어 있지 않습니다.");
+        return;
+      }
+  
+      const formData = new FormData();
+      formData.append("spotId", id);
+      formData.append("title", title);
+      formData.append("content", content);
+      formData.append("score", score);
+      formData.append("image", image);
+  
+      const response = await fetch("https://whb.pintor.dev/api/reviews", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: formData,
+      });
+  
+      if (response.ok) {
+        setReviews(prevReviews => [...prevReviews, { title, content, score, image }]);
+        navigate(`/DetailPage/${id}`);
+      } else {
+        console.error("리뷰 작성에 실패했습니다.");
+      }
+    } catch (error) {
+      console.error("에러입니다:", error);
+    };
   };
+
+
 
   return (
     <div className="mt-5">

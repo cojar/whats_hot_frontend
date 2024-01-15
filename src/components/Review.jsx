@@ -11,22 +11,16 @@ export default function Review() {
       try {
         const response = await fetch(`https://whb.pintor.dev/api/reviews?spotId=${id}`);
         const data = await response.json();
-
+  
         console.log("API 응답:", data);
-
+  
         setReviews(data.data.list);
       } catch (error) {
         console.error("에러입니다:", error);
       }
     };
-
-    const checkLoginStatus = () => {
-      const accessToken = localStorage.getItem("accessToken");
-      setIsLoggedIn(!!accessToken);
-    };
-
+  
     fetchReviews();
-    checkLoginStatus();
   }, [id]);
 
   return (
