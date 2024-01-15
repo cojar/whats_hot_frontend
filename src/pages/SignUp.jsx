@@ -125,7 +125,7 @@ export default function SignUp() {
           <div className="mt-4 text-red-400">이메일을 입력해주세요</div>
         )}
         {signUpError && <div className="mt-4 text-red-400">{signUpError}</div>}
-        <button class=" mt-8 text-white bg-primary w-full p-2 rounded-md mt-4">
+        <button class="text-white bg-primary w-full p-2 rounded-md mt-4">
           간편 회원가입하기
         </button>
       </form>

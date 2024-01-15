@@ -61,7 +61,7 @@ export default function Login() {
           />
         </div>
 
-        <button class="mt-8 text-white bg-primary w-full p-2 rounded-md mt-4">
+        <button class="text-white bg-primary w-full p-2 rounded-md mt-4">
           간편 로그인하기
         </button>
       </form>

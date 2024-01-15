@@ -22,7 +22,13 @@ export default function Review() {
       }
     };
 
+    const checkLoginStatus = () => {
+      const accessToken = localStorage.getItem("accessToken");
+      setIsLoggedIn(!!accessToken);
+    };
+
     fetchReviews();
+    checkLoginStatus();
   }, [id]);
 
   return (
