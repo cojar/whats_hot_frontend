@@ -6,7 +6,7 @@ import ReviewWrite from "../components/ReviewWrite";
 
 export default function DetailPage() {
   const { id } = useParams();
-  const [reviews, setReviews] = useState([]); // 리뷰 상태 관리
+  const [reviews, setReviews] = useState([]);
 
   return (
     <>
