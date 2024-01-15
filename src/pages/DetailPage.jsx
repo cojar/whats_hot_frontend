@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Detail from "../components/Detail";
 import Review from "../components/Review";
-import ReviewWrite from "../components/ReviewWrite";
+import ReviewWrite from "./ReviewWrite";
 
 export default function DetailPage() {
   const { id } = useParams();
