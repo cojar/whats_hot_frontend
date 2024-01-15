@@ -13,22 +13,21 @@ export default function Review() {
           `https://whb.pintor.dev/api/reviews?spotId=${id}`
         );
         const data = await response.json();
-
+  
         console.log("API 응답:", data);
-
+  
         setReviews(data.data.list);
       } catch (error) {
         console.error("에러입니다:", error);
       }
     };
-
-    const checkLoginStatus = () => {
-      const accessToken = localStorage.getItem("accessToken");
-      setIsLoggedIn(!!accessToken);
-    };
-
+  
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      setIsLoggedIn(true);
+    }
+  
     fetchReviews();
-    checkLoginStatus();
   }, [id]);
 
   return (
