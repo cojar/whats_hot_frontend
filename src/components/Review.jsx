@@ -8,6 +8,11 @@ import { MdEdit } from "react-icons/md";
 export default function Review({ spotId }) {
   const [reviews, setReviews] = useState([]);
 
+  const isLoggedIn = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    return accessToken !== null;
+  };
+  
   useEffect(() => {
     const fetchReviews = async () => {
       try {
@@ -31,11 +36,13 @@ export default function Review({ spotId }) {
     <div className="mt-4">
       <div className="flex justify-between items-center mb-4">
         <p className="text-xl font-bold">리뷰</p>
-        <Link to="/review/write">
-          <button>
-            <FaRegPenToSquare size={20} className="text-sm text-primary" />
-          </button>
-        </Link>
+        {isLoggedIn() && (
+          <Link to="/review/write">
+            <button>
+              <FaRegPenToSquare size={20} className="text-sm text-primary" />
+            </button>
+          </Link>
+        )}
       </div>
       <ul className="carousel carousel-center w-full space-x-3 overflow-x-auto">
         {reviews &&

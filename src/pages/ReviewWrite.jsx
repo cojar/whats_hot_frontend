@@ -13,6 +13,13 @@ export default function ReviewWrite({ id, setReviews }) {
     e.preventDefault();
 
     try {
+      const accessToken = localStorage.getItem("accessToken");
+      if (!accessToken) {
+        console.error("사용자가 로그인되어 있지 않습니다.");
+        // 토큰이 없는 경우에 대한 처리 추가
+        return;
+      }
+
       const formData = new FormData();
       formData.append("spotId", id);
       formData.append("title", title);
@@ -23,10 +30,13 @@ export default function ReviewWrite({ id, setReviews }) {
         formData.append("image", image);
       }
 
-      console.log("전송할 폼 데이터:", formData);
+      console.log("전송할 폼 데이터:", formData); // 폼 데이터 확인
 
       const response = await fetch("https://whb.pintor.dev/api/reviews", {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
         body: formData,
       });
 
@@ -83,9 +93,7 @@ export default function ReviewWrite({ id, setReviews }) {
           <input
             type="file"
             accept="image/*"
-            onChange={(e) =>
-              setImage(e.target.files.length > 0 ? e.target.files[0] : null)
-            }
+            onChange={(e) => setImage(e.target.files.length > 0 ? e.target.files[0] : null)}
           />
         </div>
         <button type="submit" className="bg-blue-500 text-white p-2 rounded">
