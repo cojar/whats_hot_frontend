@@ -1,96 +1,92 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { BiSolidLike } from "react-icons/bi";
+import { FaRegPenToSquare } from "react-icons/fa6";
+import { TiDelete } from "react-icons/ti";
+import { MdEdit } from "react-icons/md";
 
-export default function Review() {
+export default function Review({ spotId }) {
   const [reviews, setReviews] = useState([]);
-  const { id } = useParams();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await fetch(
-          `https://whb.pintor.dev/api/reviews?spotId=${id}`
-        );
-        const data = await response.json();
-  
-        console.log("API 응답:", data);
-  
-        setReviews(data.data.list);
+        if (spotId !== null) {
+          const response = await fetch(
+            `https://whb.pintor.dev/api/reviews?spotId=${spotId}`
+          );
+          const data = await response.json();
+          setReviews(data.data.list);
+        }
       } catch (error) {
-        console.error("에러입니다:", error);
+        console.error("리뷰를 불러오는 중 오류 발생:", error);
       }
     };
-  
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
-      setIsLoggedIn(true);
-    }
-  
+
     fetchReviews();
-  }, [id]);
+  }, [spotId]);
+  
 
   return (
-    <div className="mt-5">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold mb-4">리뷰</h2>
-        {isLoggedIn && (
-          <Link
-            to={`/DetailPage/${id}/review/write`}
-            className="bg-blue-500 text-white text-xs p-1 rounded block mb-4"
-          >
-            리뷰 작성
-          </Link>
-        )}
+    <div className="mt-4">
+      <div className="flex justify-between items-center mb-4">
+        <p className="text-xl font-bold">리뷰</p>
+        <Link to="/review/write">
+          <button>
+            <FaRegPenToSquare size={20} className="text-sm text-primary" />
+          </button>
+        </Link>
       </div>
-
-      {reviews && reviews.length > 0 ? (
-        <ul className="list-none">
-          {reviews.map((review) => (
-            <li key={review.id} className="mb-4 p-4 border rounded">
-              <div className="flex items-center mb-2">
-                <img
-                  src={review.authorProfileImage || "프로필 이미지 주소"}
-                  alt="프로필 사진"
-                  className="w-5 h-5 rounded-2xl mr-2"
-                />
-                <div className="flex flex-col">
-                  <span className="font-semibold text-xs">
-                    작성자: {review.author}
-                  </span>
-                  <span className="font-semibold text-xs">
-                    점수: {review.score}
-                  </span>
-                </div>
-                <div className="ml-auto">
-                  <span className="font-semibold text-xs">
-                    {new Date(review.createDate).toLocaleDateString()}
-                  </span>
-                </div>
-              </div>
-              <div>
-                <span className="font-semibold text-lg">{review.title}</span>
-              </div>
-              <div>
-                <span className="font-semibold text-base">
-                  {review.content}
+      <ul className="carousel carousel-center w-full space-x-3 overflow-x-auto">
+        {reviews &&
+          reviews.map((review) => (
+            <li key={review.id} className="bg-sky-100">
+              <div className="flex justify-between items-center m-2">
+                <span className="text-xl font-bold h-auto">
+                  {review.author}
                 </span>
+                <span className="text-sm w-28 mx-1 font-bold text-red-700">
+                  {review.score}점
+                </span>
+                <MdEdit size={20} className="text-sm text-primary" />
+                <TiDelete size={24} className="text-sm" />
               </div>
-              {review.imageUri && review.imageUri.length > 0 && (
-                <div>
-                  <img
-                    src={review.imageUri[0]}
-                    alt="리뷰 이미지"
-                    className="w-36 h-auto mt-2"
-                  />
+              <div className="carousel-item flex-col w-64 rounded-2xl border shadow-lg">
+                <div className="flex justify-end items-center">
+                  <span className="text-xs">
+                    {review.createDate}
+                  </span>
                 </div>
-              )}
+                <div className="h-40 flex justify-center items-center">
+                  {review.imageUri && review.imageUri[0] && (
+                    <img
+                      src={review.imageUri[0]}
+                      alt=""
+                      className="w-32 h-32"
+                    />
+                  )}
+                </div>
+                <span className="flex justify-end items-center">
+                  <button>
+                    <BiSolidLike
+                      size={20}
+                      className="text-sm text-primary opacity-60"
+                    />
+                  </button>
+                  <span className="text-xs mx-2">
+                    {review.liked !== undefined ? review.liked : 0}
+                  </span>
+                </span>
+                <div className="p-2 h-full">
+                  <div>
+                    <p className="text-sm m-2 ">{review.title}</p>
+                    <p className="text-sm m-2">{review.content}</p>
+                  </div>
+                </div>
+              </div>
             </li>
           ))}
-        </ul>
-      ) : (
-        <p className="text-lg">이 식당에 대한 리뷰가 없습니다.</p>
-      )}
+      </ul>
     </div>
   );
 }

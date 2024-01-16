@@ -1,8 +1,8 @@
 import { React, memo } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { FaHeart } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
 
 export default memo(function CarouselItem({ id, name, images, address }) {
   return (
@@ -30,12 +30,12 @@ export default memo(function CarouselItem({ id, name, images, address }) {
                 {name}
               </p>
               <span className="ml-auto bg-primary text-white p-1 rounded-lg flex justify-center items-center -mt-6 cursor-pointer">
-                <FontAwesomeIcon icon={faHeart} className="text-xl" />
+                <FaHeart size={20} />
               </span>
             </div>
             <div className="flex items-center mt-auto bottom-0">
-              <FontAwesomeIcon
-                icon={faLocationDot}
+              <FaLocationDot
+                size={14}
                 className="text-sm text-primary opacity-60"
               />
               <p className="ml-1 text-xs text-secondary mt-auto whitespace-nowrap overflow-hidden">

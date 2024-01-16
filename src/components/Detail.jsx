@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { FaHeart } from "react-icons/fa";
 
-export default function Detail() {
+export default function Detail({ spotId }) {
   const [spots, setSpots] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`https://whb.pintor.dev/api/spots/${id}`);
-        const data = await response.json();
+    if (spotId || id) {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`https://whb.pintor.dev/api/spots/${spotId || id}`);
+          const data = await response.json();
+          setSpots(data.data);
+        } catch (error) {
+          console.error("에러입니다 :", error);
+        }
+      };
 
-        setSpots(data.data);
-      } catch (error) {
-        console.error("에러입니다 :", error);
-      }
-    };
-
-    fetchData();
-  }, [id]);
+      fetchData();
+    }
+  }, [id, spotId]);
 
   if (!spots) {
     return <p>해당 맛집을 찾을 수 없습니다.</p>;
@@ -41,8 +42,8 @@ export default function Detail() {
         <div className=" bg-white w-full rounded-2xl p-4 -translate-y-16">
           <div className="flex justify-between">
             <h5 className="text-2xl font-bold">{spots.name}</h5>
-            <span className=" -mt-7 bg-primary w-8 h-8 rounded-lg flex justify-center items-center">
-              <FontAwesomeIcon icon={faHeart} className="text-xl text-white" />
+            <span className="-mt-7 bg-primary w-8 h-8 rounded-lg flex justify-center items-center">
+              <FaHeart size={20} color="white" />
             </span>
           </div>
           <p className="mt-3">

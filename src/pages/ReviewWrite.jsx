@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function ReviewWrite({ id, reviews, setReviews }) {
+export default function ReviewWrite({ id, setReviews }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [score, setScore] = useState("");
@@ -13,38 +13,36 @@ export default function ReviewWrite({ id, reviews, setReviews }) {
     e.preventDefault();
 
     try {
-      const accessToken = localStorage.getItem("accessToken");
-      if (!accessToken) {
-        console.error("사용자가 로그인되어 있지 않습니다.");
-        return;
-      }
-
       const formData = new FormData();
       formData.append("spotId", id);
       formData.append("title", title);
       formData.append("content", content);
       formData.append("score", score);
-      formData.append("image", image);
+
+      if (image !== null) {
+        formData.append("image", image);
+      }
+
+      console.log("전송할 폼 데이터:", formData);
 
       const response = await fetch("https://whb.pintor.dev/api/reviews", {
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
         body: formData,
       });
 
       if (response.ok) {
-        setReviews((prevReviews) => [
-          ...prevReviews,
-          { title, content, score, image },
-        ]);
+        const responseData = await response.json();
+        console.log("리뷰 작성 성공:", responseData);
+        setReviews((prevReviews) => [...prevReviews, responseData.data]);
         navigate(`/DetailPage/${id}`);
       } else {
-        console.error("리뷰 작성에 실패했습니다.");
+        const errorData = await response.json();
+        console.error("리뷰 작성 실패:", errorData);
+        // 서버에서 전달하는 에러 메시지 처리 추가
       }
     } catch (error) {
       console.error("에러입니다:", error);
+      // 일반적인 에러 처리 추가
     }
   };
 
@@ -85,7 +83,9 @@ export default function ReviewWrite({ id, reviews, setReviews }) {
           <input
             type="file"
             accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
+            onChange={(e) =>
+              setImage(e.target.files.length > 0 ? e.target.files[0] : null)
+            }
           />
         </div>
         <button type="submit" className="bg-blue-500 text-white p-2 rounded">

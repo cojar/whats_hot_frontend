@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
 import fetcher from "../util/fetcher";
-import { useNavigate } from "react-router-dom";
 
 function Introduction() {
   const { data, isLoading, error, mutate } = useSWR(
@@ -11,8 +10,6 @@ function Introduction() {
       dedupingInterval: 10,
     }
   );
-
-  const navigate = useNavigate();
 
   console.log("In Introduction:", data);
   console.log("In Introduction:", error);
