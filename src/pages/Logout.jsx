@@ -7,7 +7,7 @@ export default function Logout() {
   useEffect(() => {
     axios
       .post(
-        "https://whb.pintor.dev/api/members/logout",
+        "https://whatshot.pintor.dev/api/members/logout",
         {},
         {
           headers: {

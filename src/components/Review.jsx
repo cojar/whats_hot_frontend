@@ -18,7 +18,7 @@ export default function Review({ spotId }) {
       try {
         if (spotId !== null) {
           const response = await fetch(
-            `https://whb.pintor.dev/api/reviews?spotId=${spotId}`
+            `https://whatshot.pintor.dev/api/reviews?spotId=${spotId}`
           );
           const data = await response.json();
           setReviews(data.data.list);

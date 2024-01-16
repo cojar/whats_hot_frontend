@@ -4,7 +4,7 @@ import fetcher from "../util/fetcher";
 
 function Introduction() {
   const { data, isLoading, error, mutate } = useSWR(
-    "https://whb.pintor.dev/api/members/me",
+    "https://whatshot.pintor.dev/api/members/me",
     fetcher,
     {
       dedupingInterval: 10,

@@ -1,6 +1,5 @@
 import { React, memo } from "react";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaHeart } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 

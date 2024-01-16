@@ -18,7 +18,7 @@ export default function Login() {
       }
 
       axios
-        .post("https://whb.pintor.dev/api/members/login", {
+        .post("https://whatshot.pintor.dev/api/members/login", {
           username,
           password,
         })

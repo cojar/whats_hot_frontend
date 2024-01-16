@@ -11,7 +11,7 @@ export default function Detail({ spotId }) {
     if (spotId || id) {
       const fetchData = async () => {
         try {
-          const response = await fetch(`https://whb.pintor.dev/api/spots/${spotId || id}`);
+          const response = await fetch(`https://whatshot.pintor.dev/api/spots/${spotId || id}`);
           const data = await response.json();
           setSpots(data.data);
         } catch (error) {

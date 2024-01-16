@@ -46,7 +46,7 @@ export default function SignUp() {
 
       axios
         .post(
-          "https://whb.pintor.dev/api/members",
+          "https://whatshot.pintor.dev/api/members",
           {
             request: JSON.stringify({
               username: nickname,

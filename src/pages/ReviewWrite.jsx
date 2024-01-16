@@ -32,7 +32,7 @@ export default function ReviewWrite({ id, setReviews }) {
 
       console.log("전송할 폼 데이터:", formData); // 폼 데이터 확인
 
-      const response = await fetch("https://whb.pintor.dev/api/reviews", {
+      const response = await fetch("https://whatshot.pintor.dev/api/reviews", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -43,6 +43,7 @@ export default function ReviewWrite({ id, setReviews }) {
       if (response.ok) {
         const responseData = await response.json();
         console.log("리뷰 작성 성공:", responseData);
+        // Review 컴포넌트의 리뷰 목록 업데이트
         setReviews((prevReviews) => [...prevReviews, responseData.data]);
         navigate(`/DetailPage/${id}`);
       } else {
