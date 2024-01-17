@@ -4,6 +4,7 @@ import { BiSolidLike } from "react-icons/bi";
 import { FaRegPenToSquare } from "react-icons/fa6";
 import { TiDelete } from "react-icons/ti";
 import { MdEdit } from "react-icons/md";
+import { FaStar, FaStarHalf } from "react-icons/fa";
 
 export default function Review({ spotId }) {
   const [reviews, setReviews] = useState([]);
@@ -12,7 +13,7 @@ export default function Review({ spotId }) {
     const accessToken = localStorage.getItem("accessToken");
     return accessToken !== null;
   };
-  
+
   useEffect(() => {
     const fetchReviews = async () => {
       try {
@@ -30,7 +31,26 @@ export default function Review({ spotId }) {
 
     fetchReviews();
   }, [spotId]);
-  
+
+  function renderStarIcons(score) {
+    const fullStars = Math.floor(score);
+    const hasHalfStar = score % 1 !== 0;
+
+    const starIcons = [];
+
+    for (let i = 0; i < fullStars; i++) {
+      starIcons.push(<FaStar key={i} className="text-yellow-500" />);
+    }
+
+    if (hasHalfStar) {
+      starIcons.push(
+        <FaStarHalf key={fullStars} className="text-yellow-500" />
+      );
+    }
+
+    return starIcons;
+  }
+
   return (
     <div className="mt-4">
       <div className="flex justify-between items-center mb-4">
@@ -43,50 +63,28 @@ export default function Review({ spotId }) {
           </Link>
         )}
       </div>
-      <ul className="carousel carousel-center w-full space-x-3 overflow-x-auto">
+      <ul className="flex-col w-full">
         {reviews &&
           reviews.map((review) => (
-            <li key={review.id} className="bg-sky-100">
-              <div className="flex justify-between items-center m-2">
-                <span className="text-xl font-bold h-auto">
-                  {review.author}
-                </span>
-                <span className="text-sm w-28 mx-1 font-bold text-red-700">
-                  {review.score}점
-                </span>
-                <MdEdit size={20} className="text-sm text-primary" />
-                <TiDelete size={24} className="text-sm" />
-              </div>
-              <div className="carousel-item flex-col w-64 rounded-2xl border shadow-lg">
-                <div className="flex justify-end items-center">
-                  <span className="text-xs">
-                    {review.createDate}
-                  </span>
-                </div>
-                <div className="h-40 flex justify-center items-center">
-                  {review.imageUri && review.imageUri[0] && (
-                    <img
-                      src={review.imageUri[0]}
-                      alt=""
-                      className="w-32 h-32"
-                    />
-                  )}
-                </div>
-                <span className="flex justify-end items-center">
-                  <button>
-                    <BiSolidLike
-                      size={20}
-                      className="text-sm text-primary opacity-60"
-                    />
-                  </button>
-                  <span className="text-xs mx-2">
-                    {review.liked !== undefined ? review.liked : 0}
-                  </span>
-                </span>
-                <div className="p-2 h-full">
-                  <div>
-                    <p className="text-sm m-2 ">{review.title}</p>
-                    <p className="text-sm m-2">{review.content}</p>
+            <li key={review.id} className="mt-3">
+              <div className="w-full rounded-2xl border shadow-lg bg-purple-200">
+                <div className="p-2 w-full">
+                  <div className="flex justify-between items-center">
+                    <span className="text-xl font-bold">{review.author}</span>
+                    <div className="flex items-center">
+                      {renderStarIcons(review.score)}
+                    </div>
+                  </div>
+                  <div className="border-black border border-opacity-20"></div>
+                  <div className="mb-2 text-right">
+                    <span className="text-xs">
+                      {new Date(review.createDate).toLocaleString()}
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-lg font-bold mb-2 w-full overflow-hidden">{review.title}</span>
+                    <span className="border-black border border-opacity-20"></span>
+                    <span className="mt-2 text-base w-full h-auto whitespace-pre-line">{review.content}</span>
                   </div>
                 </div>
               </div>
