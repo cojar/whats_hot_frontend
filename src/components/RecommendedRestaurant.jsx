@@ -1,10 +1,13 @@
 import Tags from "./Tags";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import { FaStar } from "react-icons/fa";
+import Pagination from "./Pagination";
 
 export default function RecommendedRestaurant() {
   const [spots, setSpots] = useState([]);
-  const firstThreeSpots = spots.slice(0, 3);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5; // 페이지당 보여질 음식점 수, 필요에 따라 조절 가능
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,10 +23,21 @@ export default function RecommendedRestaurant() {
     fetchData();
   }, []);
 
+  const totalSpots = spots.length;
+  const totalPages = Math.ceil(totalSpots / itemsPerPage);
+
+  const indexOfLastSpot = currentPage * itemsPerPage;
+  const indexOfFirstSpot = indexOfLastSpot - itemsPerPage;
+  const currentSpots = spots.slice(indexOfFirstSpot, indexOfLastSpot);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <>
       <Tags />
-      {firstThreeSpots.map((spot) => (
+      {currentSpots.map((spot) => (
         <Link
           to={`/DetailPage/${spot.id}`}
           key={spot.id}
@@ -35,11 +49,26 @@ export default function RecommendedRestaurant() {
               style={{ backgroundImage: `url(${spot.imageUri})` }}
             ></div>
             <div className="flex-grow  flex flex-col ">
-              <p className="font-bold mb-1">{spot.name}</p>
-              <p className="flex-shrink-0 text-xs content-container w-64 text-secondary overflow-hidden">
-                대한민국 제주특별자치도 서귀포시 중문관광단지 인근과 서울 강남에
-                위치한 돈까스 전문 요리점 프랜차이즈이며, 방송을 타고 나서
-                유명세를 얻게 된 대표적인 식당이다.
+              <div className="flex justify-between items-center">
+                <p className="font-bold mb-1">{spot.name}</p>
+                <span className="flex items-center">
+                  <p className="mr-2 text-red-500">
+                    <FaStar />
+                  </p>
+                  <p className="font-bold">{spot.averageScore}</p>
+                </span>
+              </div>
+              <p className="text-xs font-bold">
+                주소 :
+                <span className="text-xs content-container">
+                  {spot.address}
+                </span>
+              </p>
+              <p className="text-xs font-bold">
+                전화번호 :
+                <span className="text-xs content-container">
+                  {spot.contact}
+                </span>
               </p>
               <div className="flex items-center mt-auto bottom-0">
                 {spot.hashtags?.length > 0 && (
@@ -59,6 +88,11 @@ export default function RecommendedRestaurant() {
           </div>
         </Link>
       ))}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </>
   );
 }
