@@ -11,6 +11,7 @@ export default function DetailPage() {
     const spotId = url.substring(spotIdIndex);
     setSelectedSpotId(spotId);
   }, []);
+  
 
   return (
     <>

@@ -5,7 +5,7 @@ import Login from "./pages/Login";
 import DetailPage from "./pages/DetailPage";
 import SignUp from "./pages/SignUp";
 import Logout from "./pages/Logout";
-import ReviewWrite from "./pages/ReviewWrite";
+import ReviewForm from "./pages/ReviewForm";
 
 function App() {
   return (
@@ -18,8 +18,8 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/DetailPage/:id" element={<DetailPage />} />
           <Route
-            path="/review/write"
-            element={<ReviewWrite />}
+            path="/reviewForm"
+            element={<ReviewForm />}
           />
         </Route>
       </Routes>

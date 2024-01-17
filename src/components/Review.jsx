@@ -31,13 +31,12 @@ export default function Review({ spotId }) {
     fetchReviews();
   }, [spotId]);
   
-
   return (
     <div className="mt-4">
       <div className="flex justify-between items-center mb-4">
         <p className="text-xl font-bold">리뷰</p>
         {isLoggedIn() && (
-          <Link to="/review/write">
+          <Link to="/reviewForm">
             <button>
               <FaRegPenToSquare size={20} className="text-sm text-primary" />
             </button>

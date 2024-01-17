@@ -1,27 +1,33 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-export default function ReviewWrite({ id, setReviews }) {
+export default function ReviewWrite() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [score, setScore] = useState("");
   const [image, setImage] = useState(null);
 
   const navigate = useNavigate();
-
+  const { spotId } = useParams();
+  console.log("Extracted spotId:", spotId);
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const accessToken = localStorage.getItem("accessToken");
       if (!accessToken) {
         console.error("사용자가 로그인되어 있지 않습니다.");
-        // 토큰이 없는 경우에 대한 처리 추가
         return;
       }
-
+  
+      console.log("id:", spotId);
+      console.log("title:", title);
+      console.log("content:", content);
+      console.log("score:", score);
+      console.log("image:", image);
+  
       const formData = new FormData();
-      formData.append("spotId", id);
+      formData.append("spotId", spotId);
       formData.append("title", title);
       formData.append("content", content);
       formData.append("score", score);
@@ -29,9 +35,9 @@ export default function ReviewWrite({ id, setReviews }) {
       if (image !== null) {
         formData.append("image", image);
       }
-
-      console.log("전송할 폼 데이터:", formData); // 폼 데이터 확인
-
+  
+      console.log("전송할 폼 데이터:", formData);
+  
       const response = await fetch("https://whatshot.pintor.dev/api/reviews", {
         method: "POST",
         headers: {
@@ -39,24 +45,20 @@ export default function ReviewWrite({ id, setReviews }) {
         },
         body: formData,
       });
-
+  
       if (response.ok) {
         const responseData = await response.json();
         console.log("리뷰 작성 성공:", responseData);
-        // Review 컴포넌트의 리뷰 목록 업데이트
-        setReviews((prevReviews) => [...prevReviews, responseData.data]);
-        navigate(`/DetailPage/${id}`);
+  
+        navigate(`/DetailPage/${spotId}`);
       } else {
         const errorData = await response.json();
         console.error("리뷰 작성 실패:", errorData);
-        // 서버에서 전달하는 에러 메시지 처리 추가
       }
     } catch (error) {
       console.error("에러입니다:", error);
-      // 일반적인 에러 처리 추가
     }
   };
-
   return (
     <div className="mt-5">
       <h2 className="text-2xl font-bold mb-4">리뷰 작성</h2>
