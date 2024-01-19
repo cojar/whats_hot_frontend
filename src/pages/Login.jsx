@@ -2,12 +2,18 @@ import { useCallback, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import useInput from "../hooks/useInput";
 import axios from "axios";
+import useSWR from "swr";
+import fetcher from "../util/fetcher";
 
 export default function Login() {
   const [username, onChangeUsername, setUsername] = useInput("");
 
   const [password, onChangePassword, setPassword] = useInput("");
   const [loginSuccess, setLoginSucess] = useState(false);
+  const { data, isLoading, error, mutate } = useSWR(
+    "https://whatshot.pintor.dev/api/members/me",
+    fetcher
+  );
 
   const onSubmit = useCallback(
     (e) => {
@@ -24,6 +30,7 @@ export default function Login() {
         })
         .then((res) => {
           localStorage.setItem("accessToken", res.data.data.accessToken);
+          mutate(res.data, false);
           setLoginSucess(true);
         })
         .catch((error) => {
@@ -33,7 +40,7 @@ export default function Login() {
     [username, password]
   );
 
-  if (loginSuccess) {
+  if (data) {
     return <Navigate to="/" />;
   }
 

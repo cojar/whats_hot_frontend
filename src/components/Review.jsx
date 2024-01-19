@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { BiSolidLike } from "react-icons/bi";
 import { FaRegPenToSquare } from "react-icons/fa6";
 import { TiDelete } from "react-icons/ti";
@@ -8,6 +8,7 @@ import { FaStar, FaStarHalf } from "react-icons/fa";
 
 export default function Review({ spotId }) {
   const [reviews, setReviews] = useState([]);
+  const { id } = useParams();
 
   const isLoggedIn = () => {
     const accessToken = localStorage.getItem("accessToken");
@@ -56,7 +57,7 @@ export default function Review({ spotId }) {
       <div className="flex justify-between items-center mb-4">
         <p className="text-xl font-bold">리뷰</p>
         {isLoggedIn() && (
-          <Link to="/reviewForm">
+          <Link to={`/reviewForm/${id}`}>
             <button>
               <FaRegPenToSquare size={20} className="text-sm text-primary" />
             </button>
@@ -82,9 +83,13 @@ export default function Review({ spotId }) {
                     </span>
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-lg font-bold mb-2 w-full overflow-hidden">{review.title}</span>
+                    <span className="text-lg font-bold mb-2 w-full overflow-hidden">
+                      {review.title}
+                    </span>
                     <span className="border-black border border-opacity-20"></span>
-                    <span className="mt-2 text-base w-full h-auto whitespace-pre-line">{review.content}</span>
+                    <span className="mt-2 text-base w-full h-auto whitespace-pre-line">
+                      {review.content}
+                    </span>
                   </div>
                 </div>
               </div>

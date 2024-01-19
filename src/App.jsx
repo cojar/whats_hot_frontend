@@ -4,7 +4,6 @@ import Layout from "./Layout";
 import Login from "./pages/Login";
 import DetailPage from "./pages/DetailPage";
 import SignUp from "./pages/SignUp";
-import Logout from "./pages/Logout";
 import ReviewForm from "./pages/ReviewForm";
 
 function App() {
@@ -14,13 +13,9 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/DetailPage/:id" element={<DetailPage />} />
-          <Route
-            path="/reviewForm"
-            element={<ReviewForm />}
-          />
+          <Route path="/reviewForm/:spotId" element={<ReviewForm />} />
         </Route>
       </Routes>
     </BrowserRouter>

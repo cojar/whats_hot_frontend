@@ -5,18 +5,15 @@ import fetcher from "../util/fetcher";
 function Introduction() {
   const { data, isLoading, error, mutate } = useSWR(
     "https://whatshot.pintor.dev/api/members/me",
-    fetcher,
-    {
-      dedupingInterval: 10,
-    }
+    fetcher
   );
 
-  console.log("In Introduction:", data);
-  console.log("In Introduction:", error);
+  // console.log("In Introduction:", data);
+  // console.log("In Introduction:", error);
 
-  if (error) {
-    mutate(undefined, false);
-  }
+  // if (error) {
+  //   mutate(undefined, false);
+  // }
 
   return (
     <>
