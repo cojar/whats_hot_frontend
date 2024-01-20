@@ -1,4 +1,3 @@
-import Tags from "./Tags";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
@@ -32,7 +31,9 @@ export default function RecommendedItems() {
 
   return (
     <>
-      <Tags />
+      <div className="mt-16">
+        <p className="text-xl font-bold mb-3">전체 추천지</p>
+      </div>
       {spots.length > 0 &&
         spots.map((spot) => (
           <Link

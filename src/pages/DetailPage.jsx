@@ -12,11 +12,14 @@ export default function DetailPage() {
     setSelectedSpotId(spotId);
   }, []);
   
-
   return (
     <>
-      <Detail spotId={selectedSpotId} />
-      <Review spotId={selectedSpotId} />
+      {selectedSpotId && (
+        <>
+          <Detail spotId={selectedSpotId} />
+          <Review spotId={selectedSpotId} />
+        </>
+      )}
     </>
   );
 }
