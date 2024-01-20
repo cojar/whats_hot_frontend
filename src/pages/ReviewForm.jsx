@@ -6,10 +6,9 @@ export default function ReviewWrite() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [score, setScore] = useState("");
-  const [image, setImage] = useState(null);
-
   const navigate = useNavigate();
   const { spotId } = useParams();
+
   console.log("Extracted spotId:", spotId);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,6 +46,7 @@ export default function ReviewWrite() {
       }
     );
   };
+  
   return (
     <div className="mt-5">
       <h2 className="text-2xl font-bold mb-4">리뷰 작성</h2>
@@ -78,18 +78,6 @@ export default function ReviewWrite() {
             max="5"
             value={score}
             onChange={(e) => setScore(e.target.value)}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-2">
-            이미지 업로드
-          </label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) =>
-              setImage(e.target.files.length > 0 ? e.target.files[0] : null)
-            }
           />
         </div>
         <button type="submit" className="bg-blue-500 text-white p-2 rounded">
