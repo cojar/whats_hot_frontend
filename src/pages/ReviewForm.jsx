@@ -20,50 +20,21 @@ export default function ReviewWrite() {
       return;
     }
 
-    console.log("id:", spotId);
-    console.log("title:", title);
-    console.log("content:", content);
-    console.log("score:", score);
-    console.log("image:", image);
-
-    const formData = new FormData();
-
-    formData.append("spotId", 1);
-    formData.append("year", 2021);
-    formData.append("month", 3);
-    formData.append("day", 3);
-    formData.append("title", "hihihi");
-    formData.append("content", "content");
-    formData.append("score", 4);
-    formData.append("hashtags", ["string"]);
-    formData.append("lock", true);
-    console.log(formData);
     if (image !== null) {
       formData.append("image", image);
     }
-
-    console.log("전송할 폼 데이터:", formData);
-
-    // const response = await fetch("https://whatshot.pintor.dev/api/reviews", {
-    //   method: "POST",
-    //   headers: {
-    //     Authorization: `Bearer ${accessToken}`,
-    //     "Content-Type": "multipart/form-data",
-    //   },
-    //   body: formData,
-    // });
 
     axios.post(
       "https://whatshot.pintor.dev/api/reviews",
       {
         request: JSON.stringify({
-          spotId: 2,
-          year: 2021,
-          month: 3,
-          day: 3,
-          title: "hihihi",
-          content: "content",
-          score: 4,
+          spotId: spotId,
+          year: new Date().getFullYear(),
+          month: new Date().getMonth() + 1,
+          day: new Date().getDay(),
+          title: title,
+          content: content,
+          score: score,
           hashtags: ["astring"],
           lock: true,
         }),
@@ -75,16 +46,6 @@ export default function ReviewWrite() {
         },
       }
     );
-
-    // if (response.ok) {
-    //   const responseData = await response.json();
-    //   console.log("리뷰 작성 성공:", responseData);
-
-    //   navigate(`/DetailPage/${spotId}`);
-    // } else {
-    //   const errorData = await response.json();
-    //   console.error("리뷰 작성 실패:", errorData);
-    // }
   };
   return (
     <div className="mt-5">
@@ -110,8 +71,11 @@ export default function ReviewWrite() {
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-2">점수</label>
           <input
-            type="text"
+            type="number"
             className="w-full p-2 border rounded"
+            step="0.5"
+            min="0"
+            max="5"
             value={score}
             onChange={(e) => setScore(e.target.value)}
           />
