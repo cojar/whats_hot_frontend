@@ -1,10 +1,11 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useSWR from "swr";
 import fetcher from "../util/fetcher";
 import axios from "axios";
 
 export default function Header() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { data, isLoading, error, mutate } = useSWR(
     "https://whatshot.pintor.dev/api/members/me",
     fetcher,
@@ -27,6 +28,7 @@ export default function Header() {
       .then((res) => {
         window.localStorage.removeItem("accessToken");
         mutate(undefined, false);
+        navigate(0);
       })
       .catch((err) => {});
   };
