@@ -9,7 +9,7 @@ export default function DetailPage() {
   return (
     <div>
       <Detail id={id} />
-      <Review spotId={id} /> {/* spotId를 전달해줍니다. */}
+      <Review spotId={id} />
     </div>
   );
 }

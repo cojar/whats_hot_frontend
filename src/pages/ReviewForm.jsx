@@ -7,10 +7,9 @@ export default function ReviewWrite() {
   const [content, setContent] = useState("");
   const [score, setScore] = useState("");
   const [image, setImage] = useState(null);
-
   const navigate = useNavigate();
   const { spotId } = useParams();
-  console.log("Extracted spotId:", spotId);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -24,28 +23,38 @@ export default function ReviewWrite() {
       formData.append("image", image);
     }
 
-    axios.post(
-      "https://whatshot.pintor.dev/api/reviews",
-      {
-        request: JSON.stringify({
-          spotId: spotId,
-          year: new Date().getFullYear(),
-          month: new Date().getMonth() + 1,
-          day: new Date().getDay(),
-          title: title,
-          content: content,
-          score: score,
-          hashtags: ["astring"],
-        }),
-      },
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${accessToken}`,
+    axios
+      .post(
+        "https://whatshot.pintor.dev/api/reviews",
+        {
+          request: JSON.stringify({
+            spotId: spotId,
+            year: new Date().getFullYear(),
+            month: new Date().getMonth() + 1,
+            day: new Date().getDate(),
+            title: title,
+            content: content,
+            score: score,
+            hashtags: ["astring"],
+          }),
         },
-      }
-    );
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log("Response Data:", response.data);
+
+        navigate(`/DetailPage/${spotId}`);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
+
   return (
     <div className="mt-5">
       <h2 className="text-2xl font-bold mb-4">리뷰 작성</h2>
@@ -77,18 +86,6 @@ export default function ReviewWrite() {
             max="5"
             value={score}
             onChange={(e) => setScore(e.target.value)}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-2">
-            이미지 업로드
-          </label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) =>
-              setImage(e.target.files.length > 0 ? e.target.files[0] : null)
-            }
           />
         </div>
         <button type="submit" className="bg-blue-500 text-white p-2 rounded">
