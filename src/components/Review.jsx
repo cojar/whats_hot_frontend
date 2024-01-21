@@ -1,37 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { BiSolidLike } from "react-icons/bi";
 import { FaRegPenToSquare } from "react-icons/fa6";
-import { TiDelete } from "react-icons/ti";
-import { MdEdit } from "react-icons/md";
+import Pagination from "./Pagination";
 import { FaStar, FaStarHalf } from "react-icons/fa";
 
-export default function Review({ spotId }) {
+export default function Review({ spotId }) { 
   const [reviews, setReviews] = useState([]);
-  const { id } = useParams();
-
-  const isLoggedIn = () => {
-    const accessToken = localStorage.getItem("accessToken");
-    return accessToken !== null;
-  };
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        if (spotId !== null) {
-          const response = await fetch(
-            `https://whatshot.pintor.dev/api/reviews?spotId=${spotId}`
-          );
-          const data = await response.json();
-          setReviews(data.data.list);
-        }
+        const response = await fetch(
+          `https://whatshot.pintor.dev/api/reviews?spotId=${spotId}&page=${currentPage}&size=20`
+        );
+        const data = await response.json();
+        setReviews(data.data.list);
+        setTotalPages(data.data.totalPages);
       } catch (error) {
         console.error("리뷰를 불러오는 중 오류 발생:", error);
       }
     };
 
     fetchReviews();
-  }, [spotId]);
+  }, [spotId, currentPage]);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
 
   function renderStarIcons(score) {
     const fullStars = Math.floor(score);
@@ -56,13 +53,11 @@ export default function Review({ spotId }) {
     <div className="mt-4">
       <div className="flex justify-between items-center mb-4">
         <p className="text-xl font-bold">리뷰</p>
-        {isLoggedIn() && (
-          <Link to={`/reviewForm/${id}`}>
-            <button>
-              <FaRegPenToSquare size={20} className="text-sm text-primary" />
-            </button>
-          </Link>
-        )}
+        <Link to={`/reviewForm/${spotId}`}>
+          <button>
+            <FaRegPenToSquare size={20} className="text-sm text-primary" />
+          </button>
+        </Link>
       </div>
       <ul className="flex-col w-full">
         {reviews &&
@@ -96,6 +91,13 @@ export default function Review({ spotId }) {
             </li>
           ))}
       </ul>
+      {totalPages > 0 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      )}
     </div>
   );
 }

@@ -36,7 +36,6 @@ export default function ReviewWrite() {
           content: content,
           score: score,
           hashtags: ["astring"],
-          lock: true,
         }),
       },
       {

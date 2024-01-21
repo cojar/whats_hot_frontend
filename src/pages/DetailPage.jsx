@@ -1,25 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Detail from "../components/Detail";
 import Review from "../components/Review";
+import { useParams } from "react-router-dom";
 
 export default function DetailPage() {
-  const [selectedSpotId, setSelectedSpotId] = useState(null);
+  const { id } = useParams();
 
-  useEffect(() => {
-    const url = window.location.href;
-    const spotIdIndex = url.indexOf("/DetailPage/") + "/DetailPage/".length;
-    const spotId = url.substring(spotIdIndex);
-    setSelectedSpotId(spotId);
-  }, []);
-  
   return (
-    <>
-      {selectedSpotId && (
-        <>
-          <Detail spotId={selectedSpotId} />
-          <Review spotId={selectedSpotId} />
-        </>
-      )}
-    </>
+    <div>
+      <Detail id={id} />
+      <Review spotId={id} /> {/* spotId를 전달해줍니다. */}
+    </div>
   );
 }

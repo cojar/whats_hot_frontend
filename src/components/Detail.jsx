@@ -2,25 +2,24 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 
-export default function Detail({ spotId }) {
+export default function Detail() {
   const [spots, setSpots] = useState(null);
   const { id } = useParams();
 
-useEffect(() => {
-  if (spotId || id) {
-    console.log("fetchData - spotId:", spotId, "id:", id);
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`https://whatshot.pintor.dev/api/spots/${spotId || id}`);
-        const data = await response.json();
-        setSpots(data.data);
-      } catch (error) {
-        console.error("에러입니다 :", error);
-      }
-    };
-    fetchData();
-  }
-}, [id, spotId]);
+  useEffect(() => {
+    if (id) {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`https://whatshot.pintor.dev/api/spots/${id}`);
+          const data = await response.json();
+          setSpots(data.data);
+        } catch (error) {
+          console.error("에러입니다 :", error);
+        }
+      };
+      fetchData();
+    }
+  }, [id]);
 
   if (!spots) {
     return <p>해당 맛집을 찾을 수 없습니다.</p>;
@@ -52,7 +51,8 @@ useEffect(() => {
           </p>
           <div>
             <ul>
-              <li></li>
+              {/* 이 부분은 원하는 내용으로 수정이 필요함 */}
+              <li>...</li>
             </ul>
           </div>
         </div>
