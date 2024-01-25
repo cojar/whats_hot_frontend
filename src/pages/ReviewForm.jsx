@@ -56,42 +56,44 @@ export default function ReviewWrite() {
   };
 
   return (
-    <div className="mt-5">
-      <h2 className="text-2xl font-bold mb-4">리뷰 작성</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-2">제목</label>
-          <input
-            type="text"
-            className="w-full p-2 border rounded"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-2">내용</label>
-          <textarea
-            className="w-full p-2 border rounded"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          ></textarea>
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-semibold mb-2">점수</label>
-          <input
-            type="number"
-            className="w-full p-2 border rounded"
-            step="0.5"
-            min="0"
-            max="5"
-            value={score}
-            onChange={(e) => setScore(e.target.value)}
-          />
-        </div>
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-          리뷰 작성 완료
-        </button>
-      </form>
+    <div className="mt-20 border rounded-2xl bg-blue-300 p-5 h-full flex justify-center items-center">
+      <div className="w-full text-center ">
+        <h2 className="text-2xl font-bold text-center mb-4">리뷰 작성</h2>
+        <form onSubmit={handleSubmit} className="my-20">
+          <div className="mb-6">
+            <label className="block text-left text-xl font-semibold mb-2">제목</label>
+            <input
+              type="text"
+              className="w-full p-2 border rounded"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+          <div className="mb-6">
+            <label className="block text-left text-xl font-semibold mb-2">내용</label>
+            <textarea
+              className="w-full p-2 border rounded"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            ></textarea>
+          </div>
+          <div className="mb-6">
+            <label className="block text-left text-xl font-semibold mb-2">점수</label>
+            <input
+              type="number"
+              className="w-full p-2 border rounded"
+              step="0.5"
+              min="0"
+              max="5"
+              value={score}
+              onChange={(e) => setScore(e.target.value)}
+            />
+          </div>
+          <button type="submit" className="bg-purple-600 text-white p-2 rounded mt-5">
+            리뷰 작성 완료
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
