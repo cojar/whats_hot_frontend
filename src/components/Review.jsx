@@ -3,7 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import { FaRegPenToSquare } from "react-icons/fa6";
 import Pagination from "./Pagination";
 import { FaStar, FaStarHalf } from "react-icons/fa";
-import Comment from "./Comment"; // Comment 컴포넌트를 가져옴
+import Comment from "./Comment";
+import { MdOutlineRateReview } from "react-icons/md";
 
 export default function Review({ spotId }) {
   const [reviews, setReviews] = useState([]);
@@ -11,7 +12,6 @@ export default function Review({ spotId }) {
   const [totalPages, setTotalPages] = useState(1);
   const [commentContents, setCommentContents] = useState({});
   const [commentError, setCommentError] = useState(null);
-
 
   const isLoggedIn = () => {
     const accessToken = localStorage.getItem("accessToken");
@@ -50,7 +50,9 @@ export default function Review({ spotId }) {
     }
 
     if (hasHalfStar) {
-      starIcons.push(<FaStarHalf key={fullStars} className="text-yellow-500" />);
+      starIcons.push(
+        <FaStarHalf key={fullStars} className="text-yellow-500" />
+      );
     }
 
     return starIcons;
@@ -104,11 +106,11 @@ export default function Review({ spotId }) {
   return (
     <div className="mt-4">
       <div className="flex justify-between items-center mb-4">
-        <p className="text-xl font-bold">리뷰</p>
+        <MdOutlineRateReview size={50} className="text-blue-500" />
         {isLoggedIn() && (
           <Link to="/review/write">
             <button>
-              <FaRegPenToSquare size={20} className="text-sm text-primary" />
+              <FaRegPenToSquare size={25} className="text-sm text-purple-600" />
             </button>
           </Link>
         )}
@@ -125,34 +127,42 @@ export default function Review({ spotId }) {
                       {renderStarIcons(review.score)}
                     </div>
                   </div>
-                  <div className="border-black border border-opacity-20"></div>
+                  <div className="border-black border border-opacity-20 my-2"></div>
                   <div className="mb-2 text-right">
-                    <span className="text-xs">
+                    <span className="text-xs font-bold">
                       {new Date(review.createDate).toLocaleString()}
                     </span>
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-lg font-bold mb-2 w-full overflow-hidden">
+                    <span className="text-xl font-bold mb-2 w-full overflow-hidden">
                       {review.title}
                     </span>
-                    <span className="border-black border border-opacity-20"></span>
+                    <span className="border-black border border-opacity-20 my-2"></span>
                     <span className="mt-2 text-base w-full h-auto whitespace-pre-line">
                       {review.content}
                     </span>
-                    {review.comments &&
-                      review.comments.map((comment) => (
-                        <div key={comment.id} className="mt-2">
-                          <span className="text-sm">{comment.author}: </span>
-                          <span className="text-sm">{comment.content}</span>
-                        </div>
-                      ))}
-                    <Comment
-                      reviewId={review.id}
-                      commentContent={commentContents[review.id]}
-                      onCommentSubmit={handleCommentSubmit}
-                      commentError={commentError}
-                      onCommentChange={handleCommentChange}
-                    />
+                    <div className="border-black border border-opacity-20 my-2"></div>
+                    <div className="border-white border bg-orange-300 bg-opacity-30 p-3 rounded-2xl">
+                      {review.comments &&
+                        review.comments.map((comment) => (
+                          <div
+                            key={comment.id}
+                            className="mt-2 border-b-2 border-opacity-20 border-black "
+                          >
+                            <span className="text-base font-bold">
+                              {comment.author} :{" "}
+                            </span>
+                            <span className="text-sm">{comment.content}</span>
+                          </div>
+                        ))}
+                      <Comment
+                        reviewId={review.id}
+                        commentContent={commentContents[review.id]}
+                        onCommentSubmit={handleCommentSubmit}
+                        commentError={commentError}
+                        onCommentChange={handleCommentChange}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -168,4 +178,4 @@ export default function Review({ spotId }) {
       )}
     </div>
   );
-};
+}
