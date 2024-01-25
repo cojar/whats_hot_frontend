@@ -108,7 +108,7 @@ export default function Review({ spotId }) {
       <div className="flex justify-between items-center mb-4">
         <MdOutlineRateReview size={50} className="text-blue-500" />
         {isLoggedIn() && (
-          <Link to="/review/write">
+          <Link to={`/reviewForm/${spotId}`}>
             <button>
               <FaRegPenToSquare size={25} className="text-sm text-purple-600" />
             </button>

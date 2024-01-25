@@ -1,4 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { IoChevronBackOutline } from "react-icons/io5";
 import useSWR from "swr";
 import fetcher from "../util/fetcher";
 import axios from "axios";
@@ -33,16 +34,28 @@ export default function Header() {
       .catch((err) => {});
   };
 
-  console.log(location.pathname);
+  const goBack = () => {
+    navigate(-1); // navigate 함수에 -1을 전달하여 뒤로가기를 수행
+  };
+
   return (
-    <div className="font-bold w-fit ml-auto text-primary">
+    <div className="flex justify-between items-center w-full font-bold ml-auto text-primary">
+      <button
+        className="cursor-pointer border-none bg-none p-0 text-xl"
+        onClick={goBack}
+      >
+        <IoChevronBackOutline />
+      </button>
       {!localStorage.getItem("accessToken") &&
         location.pathname !== "/login" &&
         location.pathname !== "/signup" && <Link to="/login">로그인</Link>}
       {localStorage.getItem("accessToken") && (
-        <span style={{ cursor: "pointer" }} onClick={onLogout}>
+        <button
+          className="cursor-pointer border-none bg-none p-0"
+          onClick={onLogout}
+        >
           로그아웃
-        </span>
+        </button>
       )}
     </div>
   );
