@@ -10,7 +10,7 @@ export default function Carousel() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let url = `https://whatshot.pintor.dev/api/spots?page=${currentPage}&size=50`;
+        let url = `https://whatshot.pintor.dev/api/spots?page=${currentPage}&size=20`;
 
         if (selectedCategory !== null) {
           url += `&category=${selectedCategory}`;
